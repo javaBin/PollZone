@@ -12,10 +12,28 @@
 #include "config.h"
 #include "BigButton.h"
 
-int pinInRed = D0;
-int pinOutRed = D1;
+// Green button config
+int pinInGreen = D0;
+int pinOutGreen = D1;
+const char* messageGreen = "Green";
+int lastStateGreen = 0;
+
+// Yellow button config
+int pinInYellow = D2;
+int pinOutYellow = D3;
+const char* messageYellow = "Yellow";
+int lastStateYellow = 0;
+
+// Red button config
+int pinInRed = D4;
+int pinOutRed = D5;
 const char* messageRed = "Red";
 int lastStateRed = 0;
+
+// reset button config
+int pinInReset = D6;
+int lastStateReset = 0;
+
 //BigButton red(D2, D3, "Red");
 //BigButton* red;
 
@@ -29,15 +47,20 @@ void setup() {
 	//red = new BigButton(D2, D3, "Red");
 //	auto func = []() {Serial.println("From within func"); };
 //	func();
+	setUpButton(pinInGreen, pinOutGreen, &lastStateGreen);
+	setUpButton(pinInYellow, pinOutYellow, &lastStateYellow);
 	setUpButton(pinInRed, pinOutRed, &lastStateRed);
-
+	setUpResetButton(pinInReset, &lastStateRed);
 }
 
 
 
 // the loop function runs over and over again until power down or reset
 void loop() {
+	process(pinInGreen, pinOutGreen, &lastStateGreen, messageGreen);
+	process(pinInYellow, pinOutYellow, &lastStateYellow, messageYellow);
 	process(pinInRed, pinOutRed, &lastStateRed, messageRed);
+	processReset(pinInReset, &lastStateReset);
 }
 
 void setUpButton(uint8_t inPin, uint8_t outPin, int* oldState) {
@@ -47,8 +70,13 @@ void setUpButton(uint8_t inPin, uint8_t outPin, int* oldState) {
 	*oldState = 0;
 }
 
+void setUpResetButton(uint8_t inPin, int* oldState) {
+	pinMode(inPin, INPUT);
+	*oldState = 0;
+}
+
 void process(uint8_t inPin, uint8_t outPin, int* oldState, const char message[]) {
-int buttonState = digitalRead(inPin);
+	int buttonState = digitalRead(inPin);
 	if (buttonState != *oldState) {
 
 	//		Serial.printf("last: %d now: %d\n", lastState, buttonState);
@@ -68,6 +96,22 @@ int buttonState = digitalRead(inPin);
 		// Send state to MQTT
 	}
 	*oldState = buttonState;
+	}
+
+}
+
+void processReset(uint8_t inPin, int* oldState) {
+	int buttonState = digitalRead(inPin);
+	if (buttonState != *oldState) {
+
+		//		Serial.printf("last: %d now: %d\n", lastState, buttonState);
+		//		delay(500);
+		Serial.print("Reset stateChange ");
+		Serial.print(*oldState);
+		Serial.print(" => ");
+		Serial.println(buttonState);
+
+		*oldState = buttonState;
 	}
 
 }
