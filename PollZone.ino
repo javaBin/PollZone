@@ -81,21 +81,22 @@ void process(uint8_t inPin, uint8_t outPin, int* oldState, const char message[])
 
 	//		Serial.printf("last: %d now: %d\n", lastState, buttonState);
 	//		delay(500);
-	Serial.print(message);
-	Serial.print(" stateChange ");
-	Serial.print(*oldState);
-	Serial.print(" => ");
-	Serial.println(buttonState);
+		Serial.print(message);
+		Serial.print(" stateChange ");
+		Serial.print(*oldState);
+		Serial.print(" => ");
+		Serial.println(buttonState);
 
 	//Serial.printf("pinin: %d pinout: %d oldVal: %d newVal: %d message: %s\n", inPin, outPin, *oldState, buttonState, message);
-	if (*oldState == 0) {
-		digitalWrite(outPin, LOW);
-	}
-	else {
-		digitalWrite(outPin, HIGH);
+		if (*oldState == 0) {
+			digitalWrite(outPin, LOW);
+		}
+		else {
+			digitalWrite(outPin, HIGH);
 		// Send state to MQTT
-	}
-	*oldState = buttonState;
+		}
+		*oldState = buttonState;
+		delay(100);
 	}
 
 }
