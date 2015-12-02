@@ -4,6 +4,7 @@
  Author:	kristian
 */
 
+#include <PubSubClient.h>
 #include <WiFiUdp.h>
 #include <WiFiServer.h>
 #include <WiFiClient.h>
