@@ -35,6 +35,14 @@ int lastStateRed = 0;
 int pinInReset = D6;
 int lastStateReset = 0;
 
+// network-stuff
+String mac;
+String topic;
+WiFiClient espClient;
+PubSubClient client(espClient);
+int clientLoop = 0;
+
+
 //BigButton red(D2, D3, "Red");
 //BigButton* red;
 
@@ -58,6 +66,18 @@ void setup() {
 
 // the loop function runs over and over again until power down or reset
 void loop() {
+	if (!client.connected()) {
+		reconnect();
+	}
+	else {
+		clientLoop += 1;
+		if (clientLoop % 100 == 0) {
+			if (!client.loop())
+				Serial.println("PubSubClient loop failed");
+			clientLoop = 0;
+		}
+	}
+
 	process(pinInGreen, pinOutGreen, &lastStateGreen, messageGreen);
 	process(pinInYellow, pinOutYellow, &lastStateYellow, messageYellow);
 	process(pinInRed, pinOutRed, &lastStateRed, messageRed);
@@ -94,7 +114,16 @@ void process(uint8_t inPin, uint8_t outPin, int* oldState, const char message[])
 		}
 		else {
 			digitalWrite(outPin, HIGH);
-		// Send state to MQTT
+			if (client.connected()) {
+				Serial.println("Publishing to MQTT topic " + topic + " value: " + message);
+				bool result = client.publish(topic.c_str(), message, true);
+				Serial.printf("Result: %s\n", result ? "true": "false");
+       
+			}
+			else {
+				Serial.println("Not able to publish, client not connected");
+			}
+
 		}
 		*oldState = buttonState;
 		delay(100);
@@ -137,6 +166,29 @@ void setupWifi() {
 	Serial.println("IP address: ");
 	Serial.println(WiFi.localIP());
 	Serial.println("MAC address: ");
-	Serial.println(WiFi.macAddress());
+	mac = WiFi.macAddress();
+	Serial.println(mac);
+	topic = "/pollerbox/" + mac + "/vote";
+	Serial.println("Publishing on topic: " + topic);
 
+	client.setServer(mqtt_server, 1883);
+
+}
+
+void reconnect() {
+	// Loop until we're reconnected
+	while (!client.connected()) {
+		Serial.print("Attempting MQTT connection...");
+		// Attempt to connect
+		if (client.connect(mac.c_str())) {
+			Serial.printf("connected! state: %d\n", client.state());
+		}
+		else {
+			Serial.print("failed, rc=");
+			Serial.print(client.state());
+			Serial.println(" try again in 5 seconds");
+			// Wait 5 seconds before retrying
+			delay(5000);
+		}
+	}
 }
