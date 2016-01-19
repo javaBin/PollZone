@@ -26,7 +26,7 @@ const char* messageYellow = "Yellow";
 int lastStateYellow = 0;
 
 // Red button config
-int pinInRed = D4;
+int pinInRed = D7;
 int pinOutRed = D5;
 const char* messageRed = "Red";
 int lastStateRed = 0;
