@@ -42,6 +42,9 @@ WiFiClient espClient;
 PubSubClient client(espClient);
 int clientLoop = 0;
 
+// rotating leds
+int rotateSequence = 0;
+
 
 //BigButton red(D2, D3, "Red");
 //BigButton* red;
@@ -52,14 +55,15 @@ void setup() {
 	Serial.begin(115200);
 	delay(100);
 
-	setupWifi();
-	//red = new BigButton(D2, D3, "Red");
-//	auto func = []() {Serial.println("From within func"); };
-//	func();
 	setUpButton(pinInGreen, pinOutGreen, &lastStateGreen);
 	setUpButton(pinInYellow, pinOutYellow, &lastStateYellow);
 	setUpButton(pinInRed, pinOutRed, &lastStateRed);
 	setUpResetButton(pinInReset, &lastStateRed);
+
+	setupWifi();
+	//red = new BigButton(D2, D3, "Red");
+//	auto func = []() {Serial.println("From within func"); };
+//	func();
 }
 
 
@@ -159,8 +163,9 @@ void setupWifi() {
 	while (WiFi.status() != WL_CONNECTED) {
 		delay(500);
 		Serial.print(".");
+		rotateLEDs(false);
 	}
-
+  rotateLEDs(true);
 	Serial.println("");
 	Serial.println("WiFi connected");
 	Serial.println("IP address: ");
@@ -190,5 +195,36 @@ void reconnect() {
 			// Wait 5 seconds before retrying
 			delay(5000);
 		}
+	}
+}
+
+void rotateLEDs(boolean reset) {
+	rotateSequence++;
+	int active = rotateSequence % 3;
+	if(reset){
+    digitalWrite(pinOutGreen, HIGH);
+    digitalWrite(pinOutYellow, HIGH);
+    digitalWrite(pinOutRed, HIGH);
+	}else{
+  	switch (active)
+  	{
+  	case 0:
+  		digitalWrite(pinOutGreen, HIGH);
+  		digitalWrite(pinOutYellow, LOW);
+  		digitalWrite(pinOutRed, LOW);
+  		break;
+  	case 1:
+  		digitalWrite(pinOutGreen, LOW);
+  		digitalWrite(pinOutYellow, HIGH);
+  		digitalWrite(pinOutRed, LOW);
+  		break;
+  	case 2:
+  		digitalWrite(pinOutGreen, LOW);
+  		digitalWrite(pinOutYellow, LOW);
+  		digitalWrite(pinOutRed, HIGH);
+  		break;
+  	default:
+  		break;
+  	}
 	}
 }
