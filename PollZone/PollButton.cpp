@@ -13,7 +13,7 @@ PollButton::PollButton(int _buttonId, uint8_t _buttonPin, uint8_t _ledPin, PollC
 void PollButton::setup() {
   pinMode(buttonPin, INPUT);
   pinMode(ledPin, OUTPUT);
-//  digitalWrite(outPin, HIGH);
+  digitalWrite(ledPin, LOW);
   lastState = 0;
 }
 
