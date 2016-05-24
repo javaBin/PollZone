@@ -47,7 +47,7 @@ void setup() {
   delay(100);
 
   pollClient = new PollClient(wifi_ssid, wifi_password, mqtt_server);
-  
+
   buttonOne = new PollButton(1, D0, D1, pollClient);
   buttonTwo = new PollButton(2, D2, D3, pollClient);
   buttonThree = new PollButton(3, D7, D5, pollClient);
@@ -61,7 +61,6 @@ void setup() {
 
 // the loop function runs over and over again until power down or reset
 void loop() {
-  pollClient->ensureConnected();
   buttonOne->process();
   buttonTwo->process();
   buttonThree->process();
