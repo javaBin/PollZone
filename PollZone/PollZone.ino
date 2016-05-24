@@ -46,7 +46,7 @@ void setup() {
   Serial.begin(115200);
   delay(100);
 
-  pollClient = new PollClient(wifi_ssid, wifi_password);
+  pollClient = new PollClient(wifi_ssid, wifi_password, mqtt_server);
   
   buttonOne = new PollButton(1, D0, D1, pollClient);
   buttonTwo = new PollButton(2, D2, D3, pollClient);

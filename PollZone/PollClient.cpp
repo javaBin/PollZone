@@ -7,9 +7,10 @@
 #include <ESP8266WiFi.h>
 #include "PollClient.h"
 
-PollClient::PollClient(String _ssid, String _pwd) {
+PollClient::PollClient(String _ssid, String _pwd, String _mqttServer) {
   ssid = _ssid;
   pwd = _pwd;
+  mqttServer = _mqttServer;
   client = new PubSubClient(*(new WiFiClient()));
   mac = WiFi.macAddress();
   topic = "/pollerbox/" + mac + "/vote";
@@ -28,6 +29,7 @@ void PollClient::setup() {
     }
     Serial.print(".");
   }
+  client->setServer(mqttServer.c_str(), 1883);
   
   Serial.println("\nWiFi connected");
   Serial.printf("IP address: ");
