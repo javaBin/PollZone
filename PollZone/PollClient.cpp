@@ -20,13 +20,18 @@ void PollClient::setup() {
   
   WiFi.begin(ssid.c_str(), pwd.c_str());
 
+  int iter = 0;
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
+    if (iter++ == 10) {
+      Serial.println(" Status: " + String(WiFi.status()));
+    }
     Serial.print(".");
   }
   
-  Serial.println("WiFi connected");
-  Serial.println("IP address: " + WiFi.localIP());
+  Serial.println("\nWiFi connected");
+  Serial.printf("IP address: ");
+  Serial.println(WiFi.localIP());
   Serial.println("MAC address: " + mac);
   Serial.println("Publishing on topic: " + topic);
 }
@@ -37,7 +42,7 @@ void PollClient::ensureConnected() {
     if (client->connect(mac.c_str())) {
       Serial.printf("connected! state: %d\n", client->state());
     } else {
-      Serial.println("failed, rc=" + String(client->state()) + " try again in 5 seconds");
+      Serial.printf("failed, rc=%d try again in 5 seconds\n", client->state());
       // Wait 5 seconds before retrying
       delay(5000);
     }
