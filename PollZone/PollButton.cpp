@@ -24,14 +24,13 @@ void PollButton::process() {
     Serial.println(msg);
     
     if (lastState == 0) {
-      digitalWrite(ledPin, LOW);
-    }  else {
       digitalWrite(ledPin, HIGH);
-    }
-
-    bool result = client->send(buttonId);
-    if (result) {
-      Serial.println("Button " + String(buttonId) + " push sendt to server");  
+    }  else {
+      digitalWrite(ledPin, LOW); 
+      bool result = client->send(buttonId);
+      if (result) {
+        Serial.println("Button " + String(buttonId) + " push sendt to server");  
+      }
     }
 
     lastState = buttonState;
