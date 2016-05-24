@@ -4,7 +4,7 @@
 
 PollButton::PollButton(int _buttonId, uint8_t _buttonPin, uint8_t _ledPin, PollClient* _client) {
   buttonId = _buttonId;
-  buttonPin = buttonPin;
+  buttonPin = _buttonPin;
   ledPin = _ledPin;
   client = _client;
   lastState = 0;
