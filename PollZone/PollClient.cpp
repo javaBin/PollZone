@@ -26,6 +26,7 @@ void PollClient::setup() {
     delay(500);
     if (iter++ == 10) {
       Serial.println(" Status: " + String(WiFi.status()));
+      iter = 0;
     }
     Serial.print(".");
   }
