@@ -49,9 +49,9 @@ void setup() {
 
   pollClient = new PollClient(wifi_ssid, wifi_password, mqtt_server);
 
-  buttonOne = new PollButton(1, D0, D1, pollClient);
-  buttonTwo = new PollButton(2, D2, D3, pollClient);
-  buttonThree = new PollButton(3, D7, D5, pollClient);
+  buttonOne = new PollButton(1, D0, D1);
+  buttonTwo = new PollButton(2, D2, D3);
+  buttonThree = new PollButton(3, D7, D5);
 
   pollState = new PollState(pollClient, buttonOne, buttonTwo, buttonThree);
 

@@ -1,7 +1,6 @@
 #pragma once
 #include <arduino.h>
 #include <ESP8266WiFi.h>
-#include "PollClient.h"
 
 class PollButton {
   private:
@@ -9,12 +8,12 @@ class PollButton {
     uint8_t buttonPin;
     uint8_t ledPin;
     int lastState;
-    PollClient* client;
   public:
-    PollButton(int buttonId, uint8_t buttonPin, uint8_t ledPin, PollClient* client);
+    PollButton(int buttonId, uint8_t buttonPin, uint8_t ledPin);
     void setup();
     bool processButtonPushed();
     void ledOn();
     void ledOff();
+    int getButtonId();
 };
 

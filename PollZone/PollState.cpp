@@ -20,9 +20,14 @@ void PollState::setup() {
   client->setup();
 }
 
-
 void PollState::processButton(PollButton* button) {
-  button->processButtonPushed();
+  if (button->processButtonPushed()) {
+      int buttonId = button->getButtonId();
+      bool result = client->send(buttonId);
+      if (result) {
+        Serial.println("Button " + String(buttonId) + " push sendt to server");  
+      }
+  }
 }
 
 void PollState::processButtons() {
