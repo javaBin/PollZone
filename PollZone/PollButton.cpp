@@ -17,7 +17,8 @@ void PollButton::setup() {
   lastState = 0;
 }
 
-void PollButton::process() {
+bool PollButton::processButtonPushed() {
+  bool isReleaseEvent = false;
   int buttonState = digitalRead(buttonPin);
   if (buttonState != lastState) {
     String msg = "Button " + String(buttonId) + " changed " + lastState + " => " + buttonState;
@@ -25,17 +26,19 @@ void PollButton::process() {
     
     if (lastState == 0) {
       digitalWrite(ledPin, HIGH);
-    }  else {
+    } else {
       digitalWrite(ledPin, LOW); 
       bool result = client->send(buttonId);
       if (result) {
         Serial.println("Button " + String(buttonId) + " push sendt to server");  
       }
+      isReleaseEvent = true;
     }
 
     lastState = buttonState;
     delay(100);
   }
+  return isReleaseEvent;
 }
 
 void PollButton::ledOn() {

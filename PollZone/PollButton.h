@@ -13,7 +13,7 @@ class PollButton {
   public:
     PollButton(int buttonId, uint8_t buttonPin, uint8_t ledPin, PollClient* client);
     void setup();
-    void process();
+    bool processButtonPushed();
     void ledOn();
     void ledOff();
 };

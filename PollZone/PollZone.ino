@@ -1,12 +1,14 @@
 #include "config.h"
 #include "PollButton.h"
 #include "PollClient.h"
+#include "PollState.h"
 
 PollButton* buttonOne;
 PollButton* buttonTwo;
 PollButton* buttonThree;
 
 PollClient* pollClient;
+PollState* pollState;
 
 int rotateSequence = 0;
 
@@ -50,18 +52,14 @@ void setup() {
   buttonOne = new PollButton(1, D0, D1, pollClient);
   buttonTwo = new PollButton(2, D2, D3, pollClient);
   buttonThree = new PollButton(3, D7, D5, pollClient);
-  
-  buttonOne->setup();
-  buttonTwo->setup();
-  buttonThree->setup();
 
-  pollClient->setup();
+  pollState = new PollState(pollClient, buttonOne, buttonTwo, buttonThree);
+
+  pollState->setup();
 }
 
 // the loop function runs over and over again until power down or reset
 void loop() {
-  buttonOne->process();
-  buttonTwo->process();
-  buttonThree->process();
+  pollState->processButtons();
 }
 
