@@ -1,5 +1,4 @@
 #include "config.h"
-#include "BigButton.h"
 #include "PollButton.h"
 #include "PollClient.h"
 
