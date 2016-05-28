@@ -13,7 +13,7 @@ PollClient::PollClient(String _ssid, String _pwd, String _mqttServer) {
   mqttServer = _mqttServer;
   client = new PubSubClient(*(new WiFiClient()));
   mac = WiFi.macAddress();
-  topic = "/pollerbox/" + mac + "/vote";
+  topic = "pollerbox/" + mac + "/vote";
 };
 
 void PollClient::setup() {
@@ -26,6 +26,7 @@ void PollClient::setup() {
     delay(500);
     if (iter++ == 10) {
       Serial.println(" Status: " + String(WiFi.status()));
+      iter = 0;
     }
     Serial.print(".");
   }
@@ -54,7 +55,7 @@ void PollClient::ensureConnected() {
 bool PollClient::send(int buttonId) {
   ensureConnected();
   if (client->connected()) {
-    return client->publish(topic.c_str(), String(buttonId).c_str(), true);  
+    return client->publish(topic.c_str(), String(buttonId).c_str(), false);  
   } else {
     return false;
   }
