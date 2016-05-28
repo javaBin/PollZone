@@ -1,4 +1,3 @@
-#include <arduino.h>
 #include <ESP8266WiFi.h>
 #include "PollButton.h"
 
@@ -46,4 +45,3 @@ void PollButton::ledOff() {
 int PollButton::getButtonId() {
   return buttonId;
 }
-

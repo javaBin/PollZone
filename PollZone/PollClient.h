@@ -1,5 +1,5 @@
 #pragma once
-#include <arduino.h>
+#include <WiFiClient.h>
 #include <PubSubClient.h>
 
 class PollClient {
@@ -9,11 +9,11 @@ class PollClient {
     String mqttServer;
     String mac;
     String topic;
-    PubSubClient* client;
+    WiFiClient wifiClient;
+    PubSubClient client;
   public:
-    PollClient(String ssid, String pwd, String mqttServer);
+    PollClient(const String &ssid, const String &pwd, const String &mqttServer);
     void setup();
     void ensureConnected();
     bool send(int buttonId);
 };
-

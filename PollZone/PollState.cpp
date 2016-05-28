@@ -35,4 +35,3 @@ void PollState::processButtons() {
   processButton(button2);
   processButton(button3);
 }
-

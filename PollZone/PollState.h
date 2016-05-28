@@ -21,4 +21,3 @@ class PollState {
     void setup();
     void processButtons();
 };
-

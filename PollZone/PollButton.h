@@ -1,5 +1,4 @@
 #pragma once
-#include <arduino.h>
 #include <ESP8266WiFi.h>
 
 class PollButton {
@@ -16,4 +15,3 @@ class PollButton {
     void ledOff();
     int getButtonId();
 };
-
