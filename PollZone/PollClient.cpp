@@ -13,7 +13,7 @@ PollClient::PollClient(String _ssid, String _pwd, String _mqttServer) {
   mqttServer = _mqttServer;
   client = new PubSubClient(*(new WiFiClient()));
   mac = WiFi.macAddress();
-  topic = "/pollerbox/" + mac + "/vote";
+  topic = "pollerbox/" + mac + "/vote";
 };
 
 void PollClient::setup() {
