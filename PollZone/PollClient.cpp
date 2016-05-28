@@ -55,7 +55,7 @@ void PollClient::ensureConnected() {
 bool PollClient::send(int buttonId) {
   ensureConnected();
   if (client->connected()) {
-    return client->publish(topic.c_str(), String(buttonId).c_str(), true);  
+    return client->publish(topic.c_str(), String(buttonId).c_str(), false);  
   } else {
     return false;
   }
