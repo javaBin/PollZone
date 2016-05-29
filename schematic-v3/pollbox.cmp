@@ -1,0 +1,147 @@
+Cmp-Mod V01 Created by PcbNew   date = 2016 May 29, Sunday 21:02:11
+
+BeginCmp
+TimeStamp = 57403785
+Path = /573F7C6A
+Reference = R20;
+ValeurCmp = 10k;
+IdModule  = Resistors_ThroughHole:Resistor_Horizontal_RM10mm;
+EndCmp
+
+BeginCmp
+TimeStamp = 574032B6
+Path = /565CB6A0
+Reference = R10;
+ValeurCmp = 10k;
+IdModule  = Resistors_ThroughHole:Resistor_Horizontal_RM10mm;
+EndCmp
+
+BeginCmp
+TimeStamp = 57403757
+Path = /56A492E2
+Reference = P2;
+ValeurCmp = CONN_02X03;
+IdModule  = Pin_Headers:Pin_Header_Straight_2x03;
+EndCmp
+
+BeginCmp
+TimeStamp = 5740375F
+Path = /573F6CAE
+Reference = P10;
+ValeurCmp = CONN_01X04;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x04;
+EndCmp
+
+BeginCmp
+TimeStamp = 57403767
+Path = /573F7C83
+Reference = P20;
+ValeurCmp = CONN_01X04;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x04;
+EndCmp
+
+BeginCmp
+TimeStamp = 5740376F
+Path = /573F7D3A
+Reference = P30;
+ValeurCmp = CONN_01X04;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x04;
+EndCmp
+
+BeginCmp
+TimeStamp = 57403777
+Path = /573F857B
+Reference = P40;
+ValeurCmp = CONN_01X04;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x04;
+EndCmp
+
+BeginCmp
+TimeStamp = 5740377F
+Path = /573F88AB
+Reference = P50;
+ValeurCmp = CONN_01X04;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x04;
+EndCmp
+
+BeginCmp
+TimeStamp = 5740378B
+Path = /573F7D21
+Reference = R30;
+ValeurCmp = 10k;
+IdModule  = Resistors_ThroughHole:Resistor_Horizontal_RM10mm;
+EndCmp
+
+BeginCmp
+TimeStamp = 57403791
+Path = /573F8560
+Reference = R40;
+ValeurCmp = 10k;
+IdModule  = Resistors_ThroughHole:Resistor_Horizontal_RM10mm;
+EndCmp
+
+BeginCmp
+TimeStamp = 57403797
+Path = /573F8890
+Reference = R50;
+ValeurCmp = 10k;
+IdModule  = Resistors_ThroughHole:Resistor_Horizontal_RM10mm;
+EndCmp
+
+BeginCmp
+TimeStamp = 574034F9
+Path = /573FD560
+Reference = U2;
+ValeurCmp = ULN2803;
+IdModule  = nodemcu:ULN2803_oval_pads;
+EndCmp
+
+BeginCmp
+TimeStamp = 57496A94
+Path = /57402C82
+Reference = U1;
+ValeurCmp = NodeMCU;
+IdModule  = nodemcu:NodeMCU_oval_pads;
+EndCmp
+
+BeginCmp
+TimeStamp = 57403266
+Path = /565CBA55
+Reference = C10;
+ValeurCmp = 100n;
+IdModule  = nodemcu:capasit_mod;
+EndCmp
+
+BeginCmp
+TimeStamp = 5740373B
+Path = /573F7C70
+Reference = C20;
+ValeurCmp = 100n;
+IdModule  = nodemcu:capasit_mod;
+EndCmp
+
+BeginCmp
+TimeStamp = 57403741
+Path = /573F7D27
+Reference = C30;
+ValeurCmp = 100n;
+IdModule  = nodemcu:capasit_mod;
+EndCmp
+
+BeginCmp
+TimeStamp = 57403747
+Path = /573F8566
+Reference = C40;
+ValeurCmp = 100n;
+IdModule  = nodemcu:capasit_mod;
+EndCmp
+
+BeginCmp
+TimeStamp = 5740374D
+Path = /573F8896
+Reference = C50;
+ValeurCmp = 100n;
+IdModule  = nodemcu:capasit_mod;
+EndCmp
+
+EndListe
