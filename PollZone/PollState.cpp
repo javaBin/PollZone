@@ -31,6 +31,7 @@ void PollState::processButton(PollButton* button) {
 }
 
 void PollState::processButtons() {
+  client->loop();
   processButton(button1);
   processButton(button2);
   processButton(button3);

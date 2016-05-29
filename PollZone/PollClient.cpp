@@ -35,7 +35,12 @@ void PollClient::setup() {
     }
     Serial.print(".");
   }
+<<<<<<< HEAD
+  client->setServer(mqttServer.c_str(), 1883);
+  ensureConnected();
+=======
   client.setServer(mqttServer.c_str(), 1883);
+>>>>>>> master
   
   Serial.println("\nWiFi connected");
   Serial.printf("IP address: ");
@@ -47,8 +52,9 @@ void PollClient::setup() {
 void PollClient::ensureConnected() {
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
-    if (client.connect(mac.c_str())) {
-      Serial.printf("connected! state: %d\n", client.state());
+    if (client.connect(mac.c_str(), ("pollerbox/" + mac + "/online").c_str(), 0, true, "false")) {
+      client->publish(("pollerbox/" + mac + "/online").c_str(), "true", false);  
+      Serial.printf("connected! state: %d\n", client->state());
     } else {
       Serial.printf("failed, rc=%d try again in 5 seconds\n", client.state());
       // Wait 5 seconds before retrying
