@@ -17,6 +17,6 @@ class PollClient {
     void ensureConnected();
     bool send(int buttonId);
     void loop() {
-      client->loop();
+      client.loop();
     }
 };
