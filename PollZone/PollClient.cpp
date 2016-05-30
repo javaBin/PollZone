@@ -16,7 +16,6 @@ PollClient::PollClient(
     wifiClient(),
     client(wifiClient) {
 
-//  client = new PubSubClient(*(new WiFiClient()));
   mac = WiFi.macAddress();
   topic = "pollerbox/" + mac + "/vote";
 };
@@ -49,7 +48,7 @@ void PollClient::ensureConnected() {
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
     if (client.connect(mac.c_str(), ("pollerbox/" + mac + "/online").c_str(), 0, true, "false")) {
-      client.publish(("pollerbox/" + mac + "/online").c_str(), "true", false);  
+      client.publish(("pollerbox/" + mac + "/online").c_str(), "true", true);  
       Serial.printf("connected! state: %d\n", client.state());
     } else {
       Serial.printf("failed, rc=%d try again in 5 seconds\n", client.state());
