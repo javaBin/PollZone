@@ -30,7 +30,6 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:pollbox
-LIBS:pollbox-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -253,7 +252,7 @@ F 3 "" H 2950 1150 50  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 Text Label 3100 1950 0    60   ~ 0
-LED_1
+LED_1_OUT
 $Comp
 L +5V #PWR4
 U 1 1 573F7C58
@@ -323,7 +322,7 @@ F 3 "" H 4400 1150 50  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 Text Label 4550 1950 0    60   ~ 0
-LED_2
+LED_2_OUT
 $Comp
 L +5V #PWR6
 U 1 1 573F7D0F
@@ -393,7 +392,7 @@ F 3 "" H 5850 1150 50  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 Text Label 6000 1950 0    60   ~ 0
-LED_3
+LED_3_OUT
 $Comp
 L +5V #PWR8
 U 1 1 573F854E
@@ -463,7 +462,7 @@ F 3 "" H 7300 1150 50  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 Text Label 7450 1950 0    60   ~ 0
-LED_4
+LED_4_OUT
 $Comp
 L +5V #PWR10
 U 1 1 573F887E
@@ -533,7 +532,7 @@ F 3 "" H 8750 1150 50  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 Text Label 8900 1950 0    60   ~ 0
-LED_5
+LED_5_OUT
 $Comp
 L ULN2803 U2
 U 1 1 573FD560
@@ -933,4 +932,14 @@ F 3 "" H 9850 5800 50  0000 C CNN
 	1    9650 5800
 	1    0    0    -1  
 $EndComp
+Text Label 4950 4800 0    60   ~ 0
+LED_1
+Text Label 4950 5000 0    60   ~ 0
+LED_2
+Text Label 4950 5100 0    60   ~ 0
+LED_3
+Text Label 4950 5400 0    60   ~ 0
+LED_4
+Text Label 4950 5600 0    60   ~ 0
+LED_5
 $EndSCHEMATC
