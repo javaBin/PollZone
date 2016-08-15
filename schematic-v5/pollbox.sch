@@ -1,5 +1,4 @@
 EESchema Schematic File Version 2
-LIBS:pollbox-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -30,6 +29,7 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:pollbox
+LIBS:nodemcu
 LIBS:pollbox-cache
 EELAYER 25 0
 EELAYER END
@@ -540,7 +540,7 @@ U 1 1 573FD560
 P 6650 4100
 F 0 "U2" H 6650 3950 60  0000 C CNN
 F 1 "ULN2803" H 6650 4500 60  0000 C CNN
-F 2 "Housings_DIP:DIP-18_W7.62mm" H 6650 4250 60  0001 C CNN
+F 2 "Housings_DIP.pretty:DIP-18_W7.62mm_LongPads" H 6650 4250 60  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/uln2803a.pdf" H 6600 3500 60  0001 C CNN
 	1    6650 4100
 	0    -1   -1   0   
@@ -571,17 +571,6 @@ F 2 "Pin_Headers:Pin_Header_Straight_1x15" H 5250 7000 50  0001 C CNN
 F 3 "" H 5250 7000 50  0000 C CNN
 	1    5250 7000
 	0    -1   1    0   
-$EndComp
-$Comp
-L NodeMCU-RESCUE-pollbox U1
-U 1 1 57402C82
-P 3100 5400
-F 0 "U1" H 3100 4700 60  0000 C CNN
-F 1 "NodeMCU" H 3100 5600 60  0000 C CNN
-F 2 "nodemcu:NodeMCU_wide_2" H 2300 5900 60  0001 C CNN
-F 3 "" H 2300 5900 60  0000 C CNN
-	1    3100 5400
-	-1   0    0    1   
 $EndComp
 Wire Wire Line
 	2100 4450 2100 6100
@@ -887,52 +876,6 @@ Wire Wire Line
 	6450 3500 6450 3150
 Wire Wire Line
 	6450 3150 6000 3150
-$Comp
-L TEST_1P W1
-U 1 1 57A37AA1
-P 8600 5800
-F 0 "W1" H 8600 6070 50  0000 C CNN
-F 1 "TEST_1P" H 8600 6000 50  0000 C CNN
-F 2 "Connect:1pin" H 8800 5800 50  0001 C CNN
-F 3 "" H 8800 5800 50  0000 C CNN
-	1    8600 5800
-	1    0    0    -1  
-$EndComp
-$Comp
-L TEST_1P W2
-U 1 1 57A37AFE
-P 8950 5800
-F 0 "W2" H 8950 6070 50  0000 C CNN
-F 1 "TEST_1P" H 8950 6000 50  0000 C CNN
-F 2 "Connect:1pin" H 9150 5800 50  0001 C CNN
-F 3 "" H 9150 5800 50  0000 C CNN
-	1    8950 5800
-	1    0    0    -1  
-$EndComp
-$Comp
-L TEST_1P W3
-U 1 1 57A37B3F
-P 9300 5800
-F 0 "W3" H 9300 6070 50  0000 C CNN
-F 1 "TEST_1P" H 9300 6000 50  0000 C CNN
-F 2 "Connect:1pin" H 9500 5800 50  0001 C CNN
-F 3 "" H 9500 5800 50  0000 C CNN
-	1    9300 5800
-	1    0    0    -1  
-$EndComp
-Text Notes 8750 6050 0    60   ~ 0
-Mounting holes
-$Comp
-L TEST_1P W4
-U 1 1 57A38328
-P 9650 5800
-F 0 "W4" H 9650 6070 50  0000 C CNN
-F 1 "TEST_1P" H 9650 6000 50  0000 C CNN
-F 2 "Connect:1pin" H 9850 5800 50  0001 C CNN
-F 3 "" H 9850 5800 50  0000 C CNN
-	1    9650 5800
-	1    0    0    -1  
-$EndComp
 Text Label 4950 4800 0    60   ~ 0
 LED_1
 Text Label 4950 5000 0    60   ~ 0
@@ -969,4 +912,17 @@ F 3 "" H 7050 3400 60  0000 C CNN
 $EndComp
 Wire Wire Line
 	7050 3500 7050 3400
+$Comp
+L NodeMCU_1.0 U1
+U 1 1 57ABCBC3
+P 3100 5400
+F 0 "U1" H 3100 6125 60  0000 C CNN
+F 1 "NodeMCU_1.0" H 3100 5475 60  0000 C CNN
+F 2 "nodemcu:NodeMCU" H 3200 4300 60  0001 C CNN
+F 3 "" H 2300 4950 60  0000 C CNN
+	1    3100 5400
+	1    0    0    -1  
+$EndComp
+Text Notes 4150 5900 0    60   ~ 0
+RX\nTX
 $EndSCHEMATC

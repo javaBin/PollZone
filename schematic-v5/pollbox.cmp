@@ -1,0 +1,195 @@
+Cmp-Mod V01 Created by PcbNew   date = Mon 15 Aug 2016 23:46:24 CEST
+
+BeginCmp
+TimeStamp = 57B1847B
+Path = 
+Reference = HOLE4;
+ValeurCmp = MountingHole_3.2mm_M3;
+IdModule  = Mounting_Holes.pretty:MountingHole_3.2mm_M3;
+EndCmp
+
+BeginCmp
+TimeStamp = 57AC1F2C
+Path = /57ABCBC3
+Reference = U1;
+ValeurCmp = NodeMCU_1.0;
+IdModule  = nodemcu:NodeMCU;
+EndCmp
+
+BeginCmp
+TimeStamp = 57B18475
+Path = 
+Reference = HOLE3;
+ValeurCmp = MountingHole_3.2mm_M3;
+IdModule  = Mounting_Holes.pretty:MountingHole_3.2mm_M3;
+EndCmp
+
+BeginCmp
+TimeStamp = 57B1845D
+Path = 
+Reference = HOLE2;
+ValeurCmp = MountingHole_3.2mm_M3;
+IdModule  = Mounting_Holes.pretty:MountingHole_3.2mm_M3;
+EndCmp
+
+BeginCmp
+TimeStamp = 57403777
+Path = /573F857B
+Reference = P40;
+ValeurCmp = CONN_01X04;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x04;
+EndCmp
+
+BeginCmp
+TimeStamp = 57403741
+Path = /573F7D27
+Reference = C30;
+ValeurCmp = 100n;
+IdModule  = Capacitors_ThroughHole:C_Disc_D3_P2.5;
+EndCmp
+
+BeginCmp
+TimeStamp = 57403785
+Path = /573F7C6A
+Reference = R20;
+ValeurCmp = 10k;
+IdModule  = Resistors_ThroughHole:Resistor_Horizontal_RM10mm;
+EndCmp
+
+BeginCmp
+TimeStamp = 57403266
+Path = /565CBA55
+Reference = C10;
+ValeurCmp = 100n;
+IdModule  = Capacitors_ThroughHole:C_Disc_D3_P2.5;
+EndCmp
+
+BeginCmp
+TimeStamp = 574032B6
+Path = /565CB6A0
+Reference = R10;
+ValeurCmp = 10k;
+IdModule  = Resistors_ThroughHole:Resistor_Horizontal_RM10mm;
+EndCmp
+
+BeginCmp
+TimeStamp = 5740373B
+Path = /573F7C70
+Reference = C20;
+ValeurCmp = 100n;
+IdModule  = Capacitors_ThroughHole:C_Disc_D3_P2.5;
+EndCmp
+
+BeginCmp
+TimeStamp = 57403747
+Path = /573F8566
+Reference = C40;
+ValeurCmp = 100n;
+IdModule  = Capacitors_ThroughHole:C_Disc_D3_P2.5;
+EndCmp
+
+BeginCmp
+TimeStamp = 5740374D
+Path = /573F8896
+Reference = C50;
+ValeurCmp = 100n;
+IdModule  = Capacitors_ThroughHole:C_Disc_D3_P2.5;
+EndCmp
+
+BeginCmp
+TimeStamp = 57403757
+Path = /56A492E2
+Reference = P2;
+ValeurCmp = CONN_02X03;
+IdModule  = Pin_Headers:Pin_Header_Straight_2x03;
+EndCmp
+
+BeginCmp
+TimeStamp = 5740375F
+Path = /573F6CAE
+Reference = P10;
+ValeurCmp = CONN_01X04;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x04;
+EndCmp
+
+BeginCmp
+TimeStamp = 57403767
+Path = /573F7C83
+Reference = P20;
+ValeurCmp = CONN_01X04;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x04;
+EndCmp
+
+BeginCmp
+TimeStamp = 5740376F
+Path = /573F7D3A
+Reference = P30;
+ValeurCmp = CONN_01X04;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x04;
+EndCmp
+
+BeginCmp
+TimeStamp = 5740377F
+Path = /573F88AB
+Reference = P50;
+ValeurCmp = CONN_01X04;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x04;
+EndCmp
+
+BeginCmp
+TimeStamp = 5740378B
+Path = /573F7D21
+Reference = R30;
+ValeurCmp = 10k;
+IdModule  = Resistors_ThroughHole:Resistor_Horizontal_RM10mm;
+EndCmp
+
+BeginCmp
+TimeStamp = 57403791
+Path = /573F8560
+Reference = R40;
+ValeurCmp = 10k;
+IdModule  = Resistors_ThroughHole:Resistor_Horizontal_RM10mm;
+EndCmp
+
+BeginCmp
+TimeStamp = 57403797
+Path = /573F8890
+Reference = R50;
+ValeurCmp = 10k;
+IdModule  = Resistors_ThroughHole:Resistor_Horizontal_RM10mm;
+EndCmp
+
+BeginCmp
+TimeStamp = 57AC1F4D
+Path = /573FD560
+Reference = U2;
+ValeurCmp = ULN2803;
+IdModule  = Housings_DIP.pretty:DIP-18_W7.62mm_LongPads;
+EndCmp
+
+BeginCmp
+TimeStamp = 57AD7CA1
+Path = 
+Reference = HOLE1;
+ValeurCmp = MountingHole_3.2mm_M3;
+IdModule  = Mounting_Holes.pretty:MountingHole_3.2mm_M3;
+EndCmp
+
+BeginCmp
+TimeStamp = 57AD8DFB
+Path = /5749E97D
+Reference = P1;
+ValeurCmp = CONN_01X15;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x15;
+EndCmp
+
+BeginCmp
+TimeStamp = 57AD8E19
+Path = /5749EA41
+Reference = P3;
+ValeurCmp = CONN_01X15;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x15;
+EndCmp
+
+EndListe
