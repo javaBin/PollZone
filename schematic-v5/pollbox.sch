@@ -30,6 +30,7 @@ LIBS:contrib
 LIBS:valves
 LIBS:pollbox
 LIBS:nodemcu
+LIBS:pollbox-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -865,7 +866,7 @@ Wire Wire Line
 	6450 3500 6450 3150
 Wire Wire Line
 	6450 3150 6000 3150
-Text Label 4950 4800 0    60   ~ 0
+Text Label 4950 4700 0    60   ~ 0
 LED_1
 Text Label 4950 5000 0    60   ~ 0
 LED_2
@@ -922,4 +923,17 @@ Wire Wire Line
 Wire Wire Line
 	4350 3950 4350 4800
 Connection ~ 4350 4800
+NoConn ~ 6750 3500
+NoConn ~ 6850 3500
+NoConn ~ 6950 3500
+NoConn ~ 6750 4700
+NoConn ~ 6850 4700
+NoConn ~ 6950 4700
+NoConn ~ 4750 6800
+NoConn ~ 5350 6800
+NoConn ~ 5450 6800
+NoConn ~ 700  6800
+NoConn ~ 800  6800
+NoConn ~ 1500 6800
+NoConn ~ 1600 6800
 $EndSCHEMATC
