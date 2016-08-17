@@ -30,7 +30,6 @@ LIBS:contrib
 LIBS:valves
 LIBS:pollbox
 LIBS:nodemcu
-LIBS:pollbox-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -609,9 +608,7 @@ Wire Wire Line
 Wire Wire Line
 	4100 4450 4100 6100
 Wire Wire Line
-	4000 4800 6250 4800
-Wire Wire Line
-	4000 4700 5950 4700
+	4000 4700 6250 4700
 Wire Wire Line
 	2000 6100 2200 6100
 Wire Wire Line
@@ -757,8 +754,6 @@ Connection ~ 8800 1950
 Wire Wire Line
 	3000 3950 4350 3950
 Wire Wire Line
-	4350 3950 4350 4700
-Wire Wire Line
 	4650 5500 4650 2800
 Wire Wire Line
 	4750 2900 4750 5700
@@ -856,12 +851,8 @@ Connection ~ 5650 5000
 Wire Wire Line
 	5750 4900 5750 6800
 Connection ~ 4450 4900
-Connection ~ 5850 4800
-Connection ~ 4350 4700
 Wire Wire Line
 	5950 4700 5950 6800
-Wire Wire Line
-	6250 4800 6250 4700
 Wire Wire Line
 	6350 5000 6350 4700
 Wire Wire Line
@@ -870,8 +861,6 @@ Wire Wire Line
 	6550 5400 6550 4700
 Wire Wire Line
 	6650 5600 6650 4700
-Wire Wire Line
-	5850 4800 5850 6800
 Wire Wire Line
 	6450 3500 6450 3150
 Wire Wire Line
@@ -925,4 +914,12 @@ F 3 "" H 2300 4950 60  0000 C CNN
 $EndComp
 Text Notes 4150 5900 0    60   ~ 0
 RX\nTX
+Connection ~ 5950 4700
+Wire Wire Line
+	5850 4800 5850 6800
+Wire Wire Line
+	4000 4800 5850 4800
+Wire Wire Line
+	4350 3950 4350 4800
+Connection ~ 4350 4800
 $EndSCHEMATC
