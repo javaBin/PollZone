@@ -1,4 +1,4 @@
-#include <ESP8266WiFi.h>
+#include <Arduino.h>
 #include "PollButton.h"
 
 PollButton::PollButton(int _buttonId, uint8_t _buttonPin, uint8_t _ledPin) {

@@ -14,10 +14,11 @@ class PollState {
 
   public:
     PollState(
-        PollClient* client,
-        PollButton* button1,
-        PollButton* button2,
-        PollButton* button3);
+      PollClient* client,
+      PollButton* button1,
+      PollButton* button2,
+      PollButton* button3);
     void setup();
     void processButtons();
 };
+

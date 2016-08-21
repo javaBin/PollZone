@@ -7,14 +7,14 @@
 #include "PollClient.h"
 
 PollClient::PollClient(
-    const String &_ssid,
-    const String &_pwd,
-    const String &_mqttServer) :
-    ssid(_ssid),
-    pwd(_pwd),
-    mqttServer(_mqttServer),
-    wifiClient(),
-    client(wifiClient) {
+  const String &_ssid,
+  const String &_pwd,
+  const String &_mqttServer) :
+  ssid(_ssid),
+  pwd(_pwd),
+  mqttServer(_mqttServer),
+  wifiClient(),
+  client(wifiClient) {
 
   mac = WiFi.macAddress();
   topic = "pollerbox/" + mac + "/vote";
@@ -22,7 +22,7 @@ PollClient::PollClient(
 
 void PollClient::setup() {
   Serial.println("Connecting to " + ssid);
-  
+
   WiFi.begin(ssid.c_str(), pwd.c_str());
 
   int iter = 0;
@@ -36,7 +36,7 @@ void PollClient::setup() {
   }
   client.setServer(mqttServer.c_str(), 1883);
   ensureConnected();
-  
+
   Serial.println("\nWiFi connected");
   Serial.printf("IP address: ");
   Serial.println(WiFi.localIP());
@@ -48,7 +48,7 @@ void PollClient::ensureConnected() {
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
     if (client.connect(mac.c_str(), ("pollerbox/" + mac + "/online").c_str(), 0, true, "false")) {
-      client.publish(("pollerbox/" + mac + "/online").c_str(), "true", true);  
+      client.publish(("pollerbox/" + mac + "/online").c_str(), "true", true);
       Serial.printf("connected! state: %d\n", client.state());
     } else {
       Serial.printf("failed, rc=%d try again in 5 seconds\n", client.state());

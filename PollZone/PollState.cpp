@@ -3,10 +3,10 @@
 #include "PollButton.h"
 
 PollState::PollState(
-    PollClient* _client,
-    PollButton* _b1,
-    PollButton* _b2,
-    PollButton* _b3) {
+  PollClient* _client,
+  PollButton* _b1,
+  PollButton* _b2,
+  PollButton* _b3) {
   client = _client;
   button1 = _b1;
   button2 = _b2;
@@ -22,11 +22,11 @@ void PollState::setup() {
 
 void PollState::processButton(PollButton* button) {
   if (button->processButtonPushed()) {
-      int buttonId = button->getButtonId();
-      bool result = client->send(buttonId);
-      if (result) {
-        Serial.println("Button " + String(buttonId) + " push sendt to server");  
-      }
+    int buttonId = button->getButtonId();
+    bool result = client->send(buttonId);
+    if (result) {
+      Serial.println("Button " + String(buttonId) + " push sendt to server");
+    }
   }
 }
 
@@ -36,3 +36,4 @@ void PollState::processButtons() {
   processButton(button2);
   processButton(button3);
 }
+
