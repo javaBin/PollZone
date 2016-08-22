@@ -98,9 +98,11 @@ void setup() {
 
   pollClient = new PollClient(cfg);
 
-  buttonOne = new PollButton(1, D0, D1);
+  buttonOne = new PollButton(1, D1, D0);
   buttonTwo = new PollButton(2, D2, D3);
-  buttonThree = new PollButton(3, D7, D5);
+  buttonThree = new PollButton(3, D6, D4);
+//  buttonFour = new PollButton(4, D8, D5);
+//  buttonFive = new PollButton(5, D9, D7);
 
   pollState = new PollState(pollClient, buttonOne, buttonTwo, buttonThree);
 
@@ -114,13 +116,13 @@ void loop() {
   ArduinoOTA.handle();
 
   if (in_ota) {
-    static bool on = true;
+    static bool ledState = true;
     if (ota_blink.expired()) {
-      buttonOne->led(on);
-      buttonTwo->led(on);
-      buttonThree->led(on);
+      buttonOne->led(ledState);
+      buttonTwo->led(ledState);
+      buttonThree->led(ledState);
 
-      on = !on;
+      ledState = !ledState;
     }
   } else {
     pollState->processButtons();
