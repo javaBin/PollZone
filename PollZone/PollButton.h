@@ -1,5 +1,4 @@
 #pragma once
-#include <ESP8266WiFi.h>
 
 class PollButton {
   private:
@@ -13,5 +12,7 @@ class PollButton {
     bool processButtonPushed();
     void ledOn();
     void ledOff();
+    void led(bool on);
     int getButtonId();
 };
+

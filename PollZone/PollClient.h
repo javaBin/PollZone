@@ -1,18 +1,26 @@
 #pragma once
+
+#include "Cfg.h"
 #include <WiFiClient.h>
 #include <PubSubClient.h>
 
 class PollClient {
   private:
-    String ssid;
-    String pwd; 
-    String mqttServer;
+    Cfg &cfg;
     String mac;
     String topic;
     WiFiClient wifiClient;
     PubSubClient client;
+
+    static
+    PollClient* instance;
+    static
+    void onMqttMsg(char* topic, byte* payload, unsigned int length);
+
+    void connectWifi();
+
   public:
-    PollClient(const String &ssid, const String &pwd, const String &mqttServer);
+    PollClient(Cfg &cfg);
     void setup();
     void ensureConnected();
     bool send(int buttonId);
@@ -20,3 +28,4 @@ class PollClient {
       client.loop();
     }
 };
+

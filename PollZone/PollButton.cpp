@@ -42,6 +42,10 @@ void PollButton::ledOff() {
   digitalWrite(ledPin, LOW);
 }
 
+void PollButton::led(bool on) {
+  digitalWrite(ledPin, on ? HIGH : LOW);
+}
+
 int PollButton::getButtonId() {
   return buttonId;
 }

@@ -2,19 +2,19 @@
 
 // Remove comments and give a proper value for these settings:
 
-// #define wifi_ssid
-// #define wifi_password
-// #define mqtt_server
+#define defaultWifiSsid
+#define defaultWifiPassword
+#define defaultMqttBroker
 
-#ifndef wifi_ssid
-#error You have to #define wifi_ssid
+#ifndef defaultWifiSsid
+#error You have to #define defaultWifiSsid
 #endif
 
-#ifndef wifi_password
-#error You have to #define wifi_password
+#ifndef defaultWifiPassword
+#error You have to #define defaultWifiPassword
 #endif
 
-#ifndef mqtt_server
-#error You have to #define mqtt_server
+#ifndef defaultMqttBroker
+#error You have to #define defaultMqttBroker
 #endif
 
