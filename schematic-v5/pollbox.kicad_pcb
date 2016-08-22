@@ -998,7 +998,6 @@
     (arrow2b (pts (xy 73.66 46.99) (xy 74.246421 48.116504)))
   )
   (gr_line (start 127 46.99) (end 127 119.38) (angle 90) (layer Edge.Cuts) (width 0.15))
-  (gr_line (start 77.47 46.99) (end 77.47 119.38) (angle 90) (layer Edge.Cuts) (width 0.15))
   (gr_line (start 127 119.38) (end 77.47 119.38) (angle 90) (layer Edge.Cuts) (width 0.15))
   (gr_line (start 77.47 46.99) (end 127 46.99) (angle 90) (layer Edge.Cuts) (width 0.15))
   (gr_text "Revision B" (at 102.87 107.95) (layer B.Cu)

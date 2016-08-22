@@ -7,6 +7,18 @@ kicad_generate_header(
     TEMPLATE nodemcu-arduino)
 
 kicad_pcb_plot(
-    TARGET plots-v5 ALL
+    TARGET plots-v5-pdf ALL
     PCB_FILE pollbox.kicad_pcb
     DIR ${CMAKE_CURRENT_SOURCE_DIR}/pdf)
+
+kicad_pcb_plot(
+    TARGET plots-v5-ps ALL
+    PCB_FILE pollbox.kicad_pcb
+    FORMAT PS
+    DIR ${CMAKE_CURRENT_SOURCE_DIR}/ps)
+
+kicad_pcb_plot(
+    TARGET plots-v5-svg ALL
+    PCB_FILE pollbox.kicad_pcb
+    FORMAT SVG
+    DIR ${CMAKE_CURRENT_SOURCE_DIR}/svg)
