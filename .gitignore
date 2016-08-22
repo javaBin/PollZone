@@ -3,6 +3,9 @@
 __vm/
 *-bak
 *.bak
+*~
+*.fcstd1
+\#*
 *-cache.*
 build
 _autosave-*.kicad_pcb
