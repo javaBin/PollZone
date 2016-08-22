@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdint.h>
+
 class PollButton {
   private:
     int buttonId;

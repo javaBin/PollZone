@@ -53,7 +53,6 @@ static fixed_interval_timer<1000> ota_blink;
 
 static bool in_ota = false;
 
-static
 void setupOta() {
   ArduinoOTA.onStart([]() {
     Serial.println("Starting OTA upgrade");

@@ -12,10 +12,8 @@ class PollClient {
     WiFiClient wifiClient;
     PubSubClient client;
 
-    static
-    PollClient* instance;
-    static
-    void onMqttMsg(char* topic, byte* payload, unsigned int length);
+    static PollClient* instance;
+    static void onMqttMsg(char* topic, byte* payload, unsigned int length);
 
     void connectWifi();
 
