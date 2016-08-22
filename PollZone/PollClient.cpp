@@ -99,6 +99,11 @@ void PollClient::ensureConnected() {
     if (client.connect(mac.c_str(), ("pollerbox/" + mac + "/online").c_str(), 0, true, "false")) {
       Serial.print("connected! state: ");
       Serial.println(client.state());
+
+      client.publish(("pollerbox/" + mac + "/online").c_str(), "true", true);
+      client.subscribe(("pollerbox/" + mac + "/wifi").c_str());
+      client.subscribe(("pollerbox/" + mac + "/mqtt-broker").c_str());
+        
     } else {
       Serial.printf("failed! rc=");
       Serial.println(client.state());
@@ -106,10 +111,6 @@ void PollClient::ensureConnected() {
       delay(5000);
     }
   }
-
-  client.publish(("pollerbox/" + mac + "/online").c_str(), "true", true);
-  client.subscribe(("pollerbox/" + mac + "/wifi").c_str());
-  client.subscribe(("pollerbox/" + mac + "/mqtt-broker").c_str());
 }
 
 bool PollClient::send(int buttonId) {
