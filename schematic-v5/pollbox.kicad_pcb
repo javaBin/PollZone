@@ -1,9 +1,9 @@
-(kicad_pcb (version 4) (host pcbnew 4.0.3-stable)
+(kicad_pcb (version 4) (host pcbnew 4.0.2+dfsg1-stable)
 
   (general
     (links 77)
     (no_connects 0)
-    (area 77.394999 46.914999 127.075001 119.455001)
+    (area 65.660001 40.33 127.075001 119.455001)
     (thickness 1.6)
     (drawings 10)
     (tracks 281)
@@ -63,8 +63,8 @@
     (pad_size 1.7 1.7)
     (pad_drill 0.6)
     (pad_to_mask_clearance 0.2)
-    (aux_axis_origin 77.47 118.745)
-    (grid_origin 77.47 119.38)
+    (aux_axis_origin 77.47 46.99)
+    (grid_origin 77.47 46.99)
     (visible_elements FFFFFF7F)
     (pcbplotparams
       (layerselection 0x2fdfc_80000000)
