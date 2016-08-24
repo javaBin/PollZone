@@ -4,7 +4,7 @@ __vm/
 *-bak
 *.bak
 *~
-*.fcstd1
+*.fcstd?*
 \#*
 *-cache.*
 build
