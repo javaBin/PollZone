@@ -13,10 +13,17 @@ PollClient::PollClient(
   Cfg &cfg) :
   cfg(cfg),
   wifiClient(),
-  client(wifiClient) {
-
-  mac = WiFi.macAddress();
-  topic = "pollerbox/" + mac + "/vote";
+  client(wifiClient),
+  mac(WiFi.macAddress()),
+  clientId("pollbox-" + mac),
+  voteTopic("pollerbox/" + mac + "/vote"),
+  onlineTopic("pollerbox/" + mac + "/online"),
+  serialTopic("pollerbox/" + mac + "/serial"),
+  nameTopic("pollerbox/" + mac + "/name"),
+  wifiTopic("pollerbox/" + mac + "/wifi"),
+  brokerTopic("pollerbox/" + mac + "/mqtt-broker"),
+  ipTopic("pollerbox/" + mac + "/ip"),
+  otaPasswordTopic("pollerbox/" + mac + "/ota-password") {
 };
 
 // This is called both by the main setup(), but also when reconfigured.
@@ -57,14 +64,13 @@ void PollClient::setup() {
   Serial.println("WiFi connected");
   Serial.printf("IP address: ");
   Serial.println(WiFi.localIP());
-  Serial.println("MAC address: " + mac);
+  Serial.print("MAC address: ");
+  Serial.println(mac);
 
   client.setServer(cfg.mqttBroker.c_str(), 1883);
   instance = this;
   client.setCallback(onMqttMsg);
   ensureConnected();
-
-  Serial.println("Publishing on topic: " + topic);
 }
 
 void PollClient::onMqttMsg(char* _topic, byte* payload, unsigned int length) {
@@ -76,34 +82,72 @@ void PollClient::onMqttMsg(char* _topic, byte* payload, unsigned int length) {
     value += static_cast<char>(payload[i]);
   }
 
-  if (topic.endsWith("/wifi")) {
-    auto separator = value.indexOf(':');
+  instance->onMsg(topic, value);
+}
+
+void PollClient::onMsg(const String& topic, const String& payload) {
+  if (topic.endsWith("/serial")) {
+    if (payload.length()) {
+      Serial.print("Setting serial: ");
+      Serial.println(payload);
+      cfg.setSerial(payload);
+    }
+  } else if (topic.endsWith("/name")) {
+    if (payload.length()) {
+      Serial.print("Setting name: ");
+      Serial.println(payload);
+      cfg.setName(payload);
+    }
+  } else if (topic.endsWith("/wifi")) {
+    auto separator = payload.indexOf(':');
     if (separator == -1) {
       return;
     }
 
-    String ssid = value.substring(0, separator);
-    String password = value.substring(separator + 1);
+    String ssid = payload.substring(0, separator);
+    String password = payload.substring(separator + 1);
 
-    instance->cfg.setWifi(ssid, password);
-    instance->setup();
+    cfg.setWifi(ssid, password);
+    setup();
   } else if (topic.endsWith("/mqtt-broker")) {
-    instance->cfg.setMqttBroker(value);
-    instance->setup();
+    cfg.setMqttBroker(payload);
+    setup();
+  } else if (topic.endsWith("/ota-password")) {
+    Serial.print("Setting OTA password: ");
+    Serial.println(payload);
+    cfg.setOtaPassword(payload);
   }
 }
 
 void PollClient::ensureConnected() {
   while (!client.connected()) {
     Serial.print("Connecting to MQTT broker...");
-    if (client.connect(mac.c_str(), ("pollerbox/" + mac + "/online").c_str(), 0, true, "false")) {
-      Serial.print("connected! state: ");
-      Serial.println(client.state());
+    if (client.connect(clientId.c_str(), onlineTopic.c_str(), 0, true, "false")) {
+      Serial.println("connected");
 
-      client.publish(("pollerbox/" + mac + "/online").c_str(), "true", true);
-      client.subscribe(("pollerbox/" + mac + "/wifi").c_str());
-      client.subscribe(("pollerbox/" + mac + "/mqtt-broker").c_str());
-        
+      client.publish(onlineTopic.c_str(), "true", true);
+      client.subscribe(wifiTopic.c_str());
+      client.subscribe(brokerTopic.c_str());
+      client.subscribe(otaPasswordTopic.c_str());
+
+      if (cfg.serial.length()) {
+        Serial.println("Publishing serial.");
+        client.publish(serialTopic.c_str(), cfg.serial.c_str(), true);
+        // If you want to reset the ID, uncomment this line
+        // client.subscribe(serialTopic.c_str());
+      } else {
+        client.subscribe(serialTopic.c_str());
+      }
+
+      if (cfg.name.length()) {
+        Serial.println("Publishing name.");
+        client.publish(nameTopic.c_str(), cfg.name.c_str(), true);
+      } else {
+        client.subscribe(nameTopic.c_str());
+      }
+
+      Serial.println("Publishing IP");
+      client.publish(ipTopic.c_str(), WiFi.localIP().toString().c_str(), true);
     } else {
       Serial.printf("failed! rc=");
       Serial.println(client.state());
@@ -116,7 +160,7 @@ void PollClient::ensureConnected() {
 bool PollClient::send(int buttonId) {
   ensureConnected();
   if (client.connected()) {
-    return client.publish(topic.c_str(), String(buttonId).c_str(), false);
+    return client.publish(voteTopic.c_str(), String(buttonId).c_str(), false);
   } else {
     return false;
   }

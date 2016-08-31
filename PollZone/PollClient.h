@@ -8,12 +8,21 @@ class PollClient {
   private:
     Cfg &cfg;
     String mac;
-    String topic;
+    String clientId;
+    String voteTopic;
+    String onlineTopic;
+    String serialTopic;
+    String nameTopic;
+    String wifiTopic;
+    String brokerTopic;
+    String ipTopic;
+    String otaPasswordTopic;
     WiFiClient wifiClient;
     PubSubClient client;
 
     static PollClient* instance;
     static void onMqttMsg(char* topic, byte* payload, unsigned int length);
+    void onMsg(const String& topic, const String& payload);
 
     void connectWifi();
 

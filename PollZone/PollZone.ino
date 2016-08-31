@@ -74,6 +74,15 @@ void setupOta() {
     else if (error == OTA_RECEIVE_ERROR) Serial.println("Receive Failed");
     else if (error == OTA_END_ERROR) Serial.println("End Failed");
   });
+
+  Serial.print("OTA Password: ");
+  if (cfg.otaPassword.length()) {
+    Serial.println(cfg.otaPassword);
+    ArduinoOTA.setPassword(cfg.otaPassword.c_str());
+  } else {
+    Serial.println("Not set");
+  }
+
   ArduinoOTA.begin();
 }
 
@@ -95,14 +104,33 @@ void setup() {
   Serial.println(cfg.wifiPassword);
   Serial.print("MQTT Broker:   ");
   Serial.println(cfg.mqttBroker);
+  Serial.print("Serial:        ");
+  if (cfg.serial.length()) {
+    Serial.println(cfg.serial);
+  } else {
+    Serial.println("Not set");
+  }
+  Serial.print("Name:          ");
+  if (cfg.name.length()) {
+    Serial.println(cfg.name);
+  } else {
+    Serial.println("Not set");
+  }
 
   pollClient = new PollClient(cfg);
 
-  buttonOne = new PollButton(1, D1, D0);
-  buttonTwo = new PollButton(2, D2, D3);
-  buttonThree = new PollButton(3, D6, D4);
-//  buttonFour = new PollButton(4, D8, D5);
-//  buttonFive = new PollButton(5, D9, D7);
+  // const int board = 1; // protoboard
+  const int board = 2; // prototype rev B
+
+  if (board == 1) {
+    buttonOne = new PollButton(1, D0, D1);
+    buttonTwo = new PollButton(2, D2, D3);
+    buttonThree = new PollButton(3, D7, D8);
+  } else if (board == 2) {
+    buttonOne = new PollButton(1, D1, D0);
+    buttonTwo = new PollButton(2, D2, D3);
+    buttonThree = new PollButton(3, D6, D4);
+  }
 
   pollState = new PollState(pollClient, buttonOne, buttonTwo, buttonThree);
 
