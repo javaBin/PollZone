@@ -2,7 +2,7 @@
 #include "config.h"
 #include <FS.h>
 
-Cfg::Cfg() : buildTimestamp(__DATE__ " " __TIME__) {
+Cfg::Cfg(const char *buildTimestamp) : buildTimestamp(buildTimestamp) {
 }
 
 void Cfg::readConfig(const String &key, String &dest, const char* defaultValue) {

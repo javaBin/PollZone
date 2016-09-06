@@ -7,7 +7,8 @@ class Cfg {
     void writeConfig(const String& key, const String &value);
 
   public:
-    Cfg();
+    // The buildTimestamp has to build passed in here to make sure it is always refreshed.
+    Cfg(const char* buildTimestamp);
 
     void loadConfig();
 

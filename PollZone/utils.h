@@ -8,7 +8,8 @@ class fixed_interval_timer {
     }
 
     bool expired() {
-      bool e = millis() > next;
+      auto now = millis();
+      bool e = now > next;
 
       if (!e) {
         return false;
@@ -16,7 +17,7 @@ class fixed_interval_timer {
 
       do {
         next += interval_ms;
-      } while (next > millis());
+      } while (now > next);
 
       return true;
     }

@@ -1,70 +1,33 @@
-#include "PollButton.h"
 #include "PollClient.h"
 #include "PollState.h"
+#include "Buttons.h"
 #include "Cfg.h"
 #include "utils.h"
 #include <Arduino.h>
 #include <ArduinoOTA.h>
 
-PollButton* buttonOne;
-PollButton* buttonTwo;
-PollButton* buttonThree;
-
-Cfg cfg;
+Cfg cfg(__DATE__ " " __TIME__);
 PollClient* pollClient;
 PollState* pollState;
+Buttons buttons;
 
 int rotateSequence = 0;
 
-void rotateLEDs(boolean reset) {
-  rotateSequence++;
-  int active = rotateSequence % 3;
-  if (reset) {
-    buttonOne->ledOn();
-    buttonTwo->ledOn();
-    buttonThree->ledOn();
-  } else {
-    switch (active) {
-      case 0:
-        buttonOne->ledOn();
-        buttonTwo->ledOff();
-        buttonThree->ledOff();
-        break;
-      case 1:
-        buttonOne->ledOff();
-        buttonTwo->ledOn();
-        buttonThree->ledOff();
-        break;
-      case 2:
-        buttonOne->ledOff();
-        buttonTwo->ledOff();
-        buttonThree->ledOn();
-        break;
-      default:
-        break;
-    }
-  }
-}
-
-const String build_time(__TIME__);
-const String build_date(__DATE__);
-
-static fixed_interval_timer<1000> ota_blink;
-
-static bool in_ota = false;
-
 void setupOta() {
+  static fixed_interval_timer<1000> ota_blink;
+
   ArduinoOTA.onStart([]() {
     Serial.println("Starting OTA upgrade");
-    in_ota = true;
     ota_blink.reset();
+    buttons.set_ota_mode(true);
   });
   ArduinoOTA.onEnd([]() {
-    in_ota = false;
+    buttons.set_ota_mode(false);
     Serial.println("\nOTA upgrade complete");
   });
   ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
     Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
+    buttons.loop();
   });
   ArduinoOTA.onError([](ota_error_t error) {
     Serial.printf("Error[%u]: ", error);
@@ -92,9 +55,7 @@ void setup() {
   delay(100);
 
   Serial.print("Build timestamp: ");
-  Serial.print(build_date);
-  Serial.print(" ");
-  Serial.println(build_time);
+  Serial.println(cfg.buildTimestamp);
 
   cfg.loadConfig();
   Serial.println("Configuration:");
@@ -118,22 +79,8 @@ void setup() {
   }
 
   pollClient = new PollClient(cfg);
-
-  // const int board = 1; // protoboard
-  const int board = 2; // prototype rev B
-
-  if (board == 1) {
-    buttonOne = new PollButton(1, D0, D1);
-    buttonTwo = new PollButton(2, D2, D3);
-    buttonThree = new PollButton(3, D7, D8);
-  } else if (board == 2) {
-    buttonOne = new PollButton(1, D1, D0);
-    buttonTwo = new PollButton(2, D2, D3);
-    buttonThree = new PollButton(3, D6, D4);
-  }
-
-  pollState = new PollState(pollClient, buttonOne, buttonTwo, buttonThree);
-
+  buttons.setup();
+  pollState = new PollState(pollClient, buttons);
   pollState->setup();
 
   setupOta();
@@ -143,17 +90,8 @@ void setup() {
 void loop() {
   ArduinoOTA.handle();
 
-  if (in_ota) {
-    static bool ledState = true;
-    if (ota_blink.expired()) {
-      buttonOne->led(ledState);
-      buttonTwo->led(ledState);
-      buttonThree->led(ledState);
-
-      ledState = !ledState;
-    }
-  } else {
-    pollState->processButtons();
-  }
+  buttons.loop();
+  pollClient->loop();
+  pollState->loop();
 }
 

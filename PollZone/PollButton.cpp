@@ -1,37 +1,34 @@
 #include <Arduino.h>
 #include "PollButton.h"
 
-PollButton::PollButton(int _buttonId, uint8_t _buttonPin, uint8_t _ledPin) {
-  buttonId = _buttonId;
-  buttonPin = _buttonPin;
-  ledPin = _ledPin;
-  lastState = 0;
+PollButton::PollButton(int _buttonId, uint8_t _buttonPin, uint8_t _ledPin) :
+  buttonId(_buttonId),
+  buttonPin(_buttonPin),
+  ledPin(_ledPin),
+  state(false),
+  recently_changed(false) {
 }
 
 void PollButton::setup() {
   pinMode(buttonPin, INPUT);
   pinMode(ledPin, OUTPUT);
   digitalWrite(ledPin, LOW);
-  lastState = 0;
+  state = false;
 }
 
-bool PollButton::processButtonPushed() {
-  bool isReleaseEvent = false;
-  int buttonState = digitalRead(buttonPin);
-  if (buttonState != lastState) {
-    String msg = "Button " + String(buttonId) + " changed " + lastState + " => " + buttonState;
-    Serial.println(msg);
-    
-    if (lastState == 0) {
-      digitalWrite(ledPin, HIGH);
-    } else {
-      digitalWrite(ledPin, LOW); 
-      isReleaseEvent = true;
-    }
-    lastState = buttonState;
-    delay(100);
+void PollButton::loop() {
+  if (!debounce_timer.expired()) {
+    return;
   }
-  return isReleaseEvent;
+
+  bool currentState = digitalRead(buttonPin);
+  if (currentState == state) {
+    return;
+  }
+
+  state = currentState;
+  recently_changed = true;
+  Serial.println("Button " + String(buttonId) + " changed: " + state + " => " + currentState);
 }
 
 void PollButton::ledOn() {

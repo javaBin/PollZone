@@ -4,24 +4,15 @@
 
 PollState::PollState(
   PollClient* _client,
-  PollButton* _b1,
-  PollButton* _b2,
-  PollButton* _b3) {
-  client = _client;
-  button1 = _b1;
-  button2 = _b2;
-  button3 = _b3;
-};
+  Buttons& buttons): client(_client), buttons(buttons) {
+}
 
 void PollState::setup() {
-  button1->setup();
-  button2->setup();
-  button3->setup();
   client->setup();
 }
 
 void PollState::processButton(PollButton* button) {
-  if (button->processButtonPushed()) {
+  if (button->has_recently_changed() && button->pressed()) {
     int buttonId = button->getButtonId();
     bool result = client->send(buttonId);
     if (result) {
@@ -30,10 +21,9 @@ void PollState::processButton(PollButton* button) {
   }
 }
 
-void PollState::processButtons() {
-  client->loop();
-  processButton(button1);
-  processButton(button2);
-  processButton(button3);
+void PollState::loop() {
+  processButton(buttons.button1);
+  processButton(buttons.button2);
+  processButton(buttons.button3);
 }
 
