@@ -2,6 +2,9 @@
 #include "config.h"
 #include <FS.h>
 
+Cfg::Cfg() : buildTimestamp(__DATE__ " " __TIME__) {
+}
+
 void Cfg::readConfig(const String &key, String &dest, const char* defaultValue) {
   String file = "/" + key + ".txt";
   

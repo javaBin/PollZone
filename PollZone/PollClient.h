@@ -17,6 +17,7 @@ class PollClient {
     String brokerTopic;
     String ipTopic;
     String otaPasswordTopic;
+    String buildTimestampTopic;
     WiFiClient wifiClient;
     PubSubClient client;
 

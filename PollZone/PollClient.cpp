@@ -23,7 +23,8 @@ PollClient::PollClient(
   wifiTopic("pollerbox/" + mac + "/wifi"),
   brokerTopic("pollerbox/" + mac + "/mqtt-broker"),
   ipTopic("pollerbox/" + mac + "/ip"),
-  otaPasswordTopic("pollerbox/" + mac + "/ota-password") {
+  otaPasswordTopic("pollerbox/" + mac + "/ota-password"),
+  buildTimestampTopic("pollerbox/" + mac + "/build-timestamp") {
 };
 
 // This is called both by the main setup(), but also when reconfigured.
@@ -148,6 +149,8 @@ void PollClient::ensureConnected() {
 
       Serial.println("Publishing IP");
       client.publish(ipTopic.c_str(), WiFi.localIP().toString().c_str(), true);
+
+      client.publish(buildTimestampTopic.c_str(), cfg.buildTimestamp.c_str(), true);
     } else {
       Serial.printf("failed! rc=");
       Serial.println(client.state());

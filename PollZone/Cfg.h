@@ -7,6 +7,8 @@ class Cfg {
     void writeConfig(const String& key, const String &value);
 
   public:
+    Cfg();
+
     void loadConfig();
 
     void setSerial(const String &serial);
@@ -21,5 +23,6 @@ class Cfg {
     String wifiSsid;
     String wifiPassword;
     String otaPassword;
+    String buildTimestamp;
 };
 
